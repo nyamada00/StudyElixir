@@ -19,8 +19,8 @@ defmodule OrdersCsv do
     end
     defp split_columns(line) do
         line
-        |>String.trim
-        |>String.split(",")
+        |> String.trim
+        |> String.split(",")
     end
     defp convert_types([id,":"<>city,net_amount]) do
         [
