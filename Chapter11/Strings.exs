@@ -26,10 +26,10 @@ defmodule Strings do
         n1/n2
     end
 #StringsAndBinaries-5
-    def pyramid(s) do
+    def center(s) do
         max_len=s |> Enum.map(&String.length/1) |> Enum.max
         Enum.each s, fn str->
-            IO.puts String.rjust str, div(max_len+String.length(str),2)
+            IO.puts String.pad_leading str, div(max_len+String.length(str),2)
         end
     end
 #StringsAndBinaries-6
