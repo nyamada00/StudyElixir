@@ -11,21 +11,23 @@ defmodule Ticker do
     def generator(clients) do
         receive do
             {:register, pid} ->
-            IO.puts "registering #{inspect pid}"
-            generator([pid|clients],0)
+            idx = length(clients)
+            IO.puts "registering #{inspect idx}, #{inspect pid}"
+            generator([pid|clients],idx)
         end
     end
     def generator(clients, index) do
         receive do
             {:register, pid} ->
-            IO.puts "registering #{inspect pid}"
-            generator([pid|clients],index)
+            idx = length(clients)
+            IO.puts "registering #{inspect idx}, #{inspect pid}"
+            generator([pid|clients],idx)
             after 
              @interval ->
                 IO.puts "tick"
                 index=rem(index+1, length(clients))
                 client = Enum.at(clients,index)
-                IO.puts "send to #{inspect client}"
+                IO.puts "send to #{inspect index},#{inspect client}"
                 send client, {:tick}
               generator(clients)
         end
