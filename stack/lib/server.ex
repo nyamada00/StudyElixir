@@ -7,4 +7,7 @@ defmodule Stack.Server do
     def handle_call(:pop, _, [head|tail]) do
         {:reply, head, tail}
     end
+    def handle_cast({:push, v}, list) do
+        {:noreply, [v|list] }
+    end
 end
